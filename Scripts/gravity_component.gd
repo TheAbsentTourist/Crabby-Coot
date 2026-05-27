@@ -1,20 +1,36 @@
 class_name GravityComponent
 extends Node
 
-@export var gravity_multiplier: float = 0.8
-@export var body: Node
-@export var jump_released_multiplier: float = 2.3
+@onready var velocity_component: VelocityComponent = $"../VelocityComponent"
+
+@export var gravity_multiplier: float = 1.0
+@export var body: Node2D
+@export var jump_released_multiplier: float = 1.0
+@export var base_gravity: float = 980.0 
 
 var wants_jump: bool = false
 
-func update(delta):
-	# Sets gravity based on multiplier
-	if not body.is_on_floor():
-		var current_gravity = body.get_gravity() * gravity_multiplier
-	
-	# Weakens gravity if jump is pressed in the air
+func update(delta: float) -> void:
+	if body == null:
+		return
+
+	# HANDLE CHARACTERBODY2D
+	if body is CharacterBody2D:
+		if not body.is_on_floor():
+			var current_gravity = body.get_gravity() * gravity_multiplier
+			if not wants_jump:
+				current_gravity *= jump_released_multiplier
+			body.velocity += current_gravity * delta
+
+	# HANDLE NODE2D
+	elif body is Node2D:
+		
+		var gravity_vector = Vector2.DOWN * base_gravity
+		var current_gravity = gravity_vector * gravity_multiplier
+		
 		if not wants_jump:
 			current_gravity *= jump_released_multiplier
-	
-	# Applies gravity
-		body.velocity += current_gravity * delta
+			
+		# If finds a velocity component, pushes gravity into its Y axis
+		if velocity_component:
+			velocity_component.velocity.y += current_gravity.y * delta

@@ -205,7 +205,9 @@ metadata/_custom_type_script = "uid://t1qrywldapcq"
 
 [node name="GravityComponent" type="Node" parent="." unique_id=1488052280 node_paths=PackedStringArray("body")]
 script = ExtResource("11_14y0q")
+gravity_multiplier = 0.8
 body = NodePath("..")
+jump_released_multiplier = 2.3
 metadata/_custom_type_script = "uid://cd42bhh0myqfg"
 
 [node name="JumpComponent" type="Node" parent="." unique_id=1975252914 node_paths=PackedStringArray("body")]

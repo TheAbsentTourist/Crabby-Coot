@@ -5,7 +5,8 @@
 [ext_resource type="Texture2D" uid="uid://4t8a6a751wsp" path="res://Assets/explosions/03.png" id="2_6ygg1"]
 [ext_resource type="Script" uid="uid://hrocxtlx18j1" path="res://Scripts/explosion_component.gd" id="2_k2una"]
 [ext_resource type="Texture2D" uid="uid://cdnfvkheloyej" path="res://raibyte.jpg" id="5_kf8wt"]
-[ext_resource type="Script" uid="uid://cwigsemjvwfdu" path="res://Scripts/jump_component.gd" id="6_rufbp"]
+[ext_resource type="Script" uid="uid://cvrrg26e7yw4i" path="res://Scripts/velocity_component.gd" id="6_2tbeo"]
+[ext_resource type="Script" uid="uid://cd42bhh0myqfg" path="res://Scripts/gravity_component.gd" id="7_6ygg1"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_we7h8"]
 
@@ -200,17 +201,6 @@ shape = SubResource("CircleShape2D_we7h8")
 sprite_frames = SubResource("SpriteFrames_ixie6")
 animation = &"explode"
 
-[node name="ExplosionComponent" type="Node" parent="." unique_id=2097184429 node_paths=PackedStringArray("explode_box", "animation_sprite")]
-script = ExtResource("2_k2una")
-explode_box = NodePath("../Area2D")
-animation_sprite = NodePath("../AnimatedSprite2D")
-metadata/_custom_type_script = "uid://hrocxtlx18j1"
-
-[node name="MovementComponent" type="Node" parent="." unique_id=1984645270 node_paths=PackedStringArray("body")]
-script = ExtResource("6_rufbp")
-body = NodePath("..")
-metadata/_custom_type_script = "uid://cwigsemjvwfdu"
-
 [node name="Raibyte" type="Sprite2D" parent="." unique_id=1777986272]
 position = Vector2(-164.5, 159.78)
 scale = Vector2(39.24889, 1)
@@ -221,3 +211,19 @@ texture = ExtResource("5_kf8wt")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Raibyte/StaticBody2D" unique_id=679254792]
 position = Vector2(0.5, 0)
 shape = SubResource("RectangleShape2D_2tbeo")
+
+[node name="ExplosionComponent" type="Node" parent="." unique_id=2097184429 node_paths=PackedStringArray("explode_box", "animation_sprite")]
+script = ExtResource("2_k2una")
+explode_box = NodePath("../Area2D")
+animation_sprite = NodePath("../AnimatedSprite2D")
+metadata/_custom_type_script = "uid://hrocxtlx18j1"
+
+[node name="GravityComponent" type="Node" parent="." unique_id=920476960 node_paths=PackedStringArray("body")]
+script = ExtResource("7_6ygg1")
+body = NodePath("..")
+metadata/_custom_type_script = "uid://cd42bhh0myqfg"
+
+[node name="VelocityComponent" type="Node" parent="." unique_id=1863602806 node_paths=PackedStringArray("body")]
+script = ExtResource("6_2tbeo")
+body = NodePath("..")
+metadata/_custom_type_script = "uid://cvrrg26e7yw4i"

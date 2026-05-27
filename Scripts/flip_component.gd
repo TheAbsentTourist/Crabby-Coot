@@ -15,12 +15,12 @@ func update(direction: float) -> void:
 		if flip_collisions:
 			right_collision.disabled = false
 			left_collision.disabled = true
-			right_collision.visible = false
-			left_collision.visible = true
+			#right_collision.visible = false
+			#left_collision.visible = true
 	elif velocity_component.direction > 0:
 		sprite.flip_h = false
 		if flip_collisions:
 			right_collision.disabled = true
 			left_collision.disabled = false
-			right_collision.visible = true
-			left_collision.visible = false
+			#right_collision.visible = true
+			#left_collision.visible = false
