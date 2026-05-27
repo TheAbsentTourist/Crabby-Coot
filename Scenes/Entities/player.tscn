@@ -1,0 +1,214 @@
+[gd_scene format=3 uid="uid://6cb30f1i6ht0"]
+
+[ext_resource type="Script" uid="uid://k82ldo4o3iap" path="res://Scripts/player.gd" id="1_6t5aa"]
+[ext_resource type="Texture2D" uid="uid://b63iepn22ot02" path="res://Assets/CrabbyCootWizard.png" id="1_v0iea"]
+[ext_resource type="Script" uid="uid://t1qrywldapcq" path="res://Scripts/input_component.gd" id="3_vgqql"]
+[ext_resource type="Script" uid="uid://6x5gufai1i8t" path="res://Scripts/animation_component.gd" id="4_f1ek2"]
+[ext_resource type="Script" uid="uid://cwigsemjvwfdu" path="res://Scripts/jump_component.gd" id="4_vgqql"]
+[ext_resource type="Script" uid="uid://bhexx6mj1xv3q" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2d.gd" id="5_3smsa"]
+[ext_resource type="Script" uid="uid://8umksf8e80fw" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="6_8erm5"]
+[ext_resource type="Script" uid="uid://bg4uc5uxx15jc" path="res://Scripts/flip_component.gd" id="6_85s6f"]
+[ext_resource type="Script" uid="uid://cvrrg26e7yw4i" path="res://Scripts/velocity_component.gd" id="7_14y0q"]
+[ext_resource type="Script" uid="uid://bd046eokvcnu2" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="7_f1ek2"]
+[ext_resource type="Script" uid="uid://cd42bhh0myqfg" path="res://Scripts/gravity_component.gd" id="11_14y0q"]
+
+[sub_resource type="Resource" id="Resource_8erm5"]
+script = ExtResource("6_8erm5")
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_8erm5"]
+load_path = "res://.godot/imported/CrabbyCootWalk.png-0b66cbf3b382d847868f46dd8d027ea9.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f1ek2"]
+atlas = SubResource("CompressedTexture2D_8erm5")
+region = Rect2(0, 0, 19, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tx1dd"]
+atlas = SubResource("CompressedTexture2D_8erm5")
+region = Rect2(19, 0, 19, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gymyn"]
+atlas = SubResource("CompressedTexture2D_8erm5")
+region = Rect2(38, 0, 19, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pu2lt"]
+atlas = SubResource("CompressedTexture2D_8erm5")
+region = Rect2(38, 0, 19, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ukyrk"]
+atlas = SubResource("CompressedTexture2D_8erm5")
+region = Rect2(19, 0, 19, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fd4e3"]
+atlas = SubResource("CompressedTexture2D_8erm5")
+region = Rect2(0, 0, 19, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7dp3o"]
+atlas = ExtResource("1_v0iea")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h4iuc"]
+atlas = ExtResource("1_v0iea")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qqcod"]
+atlas = SubResource("CompressedTexture2D_8erm5")
+region = Rect2(38, 0, 19, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_7dp3o"]
+resource_local_to_scene = true
+animations = [{
+"frames": [{
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_f1ek2")
+}, {
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_tx1dd")
+}, {
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_gymyn")
+}],
+"loop": false,
+"name": &"CootAcceleration",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_pu2lt")
+}, {
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_ukyrk")
+}, {
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_fd4e3")
+}],
+"loop": false,
+"name": &"CootDeceleration",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 20.0,
+"texture": SubResource("AtlasTexture_7dp3o")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h4iuc")
+}, {
+"duration": 28.0,
+"texture": SubResource("AtlasTexture_7dp3o")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h4iuc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7dp3o")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h4iuc")
+}, {
+"duration": 28.0,
+"texture": SubResource("AtlasTexture_7dp3o")
+}, {
+"duration": 4.0,
+"texture": SubResource("AtlasTexture_h4iuc")
+}, {
+"duration": 28.0,
+"texture": SubResource("AtlasTexture_7dp3o")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h4iuc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7dp3o")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h4iuc")
+}],
+"loop": true,
+"name": &"CootIdle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qqcod")
+}],
+"loop": true,
+"name": &"CootWalk",
+"speed": 5.0
+}]
+
+[node name="Player" type="CharacterBody2D" unique_id=734444364]
+script = ExtResource("1_6t5aa")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=692187895]
+process_priority = 1
+physics_interpolation_mode = 1
+top_level = true
+position = Vector2(0, -34.02)
+zoom = Vector2(4.505, 4.505)
+
+[node name="PhantomCamera2D" type="Node2D" parent="Camera2D" unique_id=1412736773 node_paths=PackedStringArray("follow_target")]
+top_level = true
+position = Vector2(0, -34.02)
+script = ExtResource("5_3smsa")
+follow_mode = 5
+follow_target = NodePath("../..")
+zoom = Vector2(4.505, 4.505)
+tween_resource = SubResource("Resource_8erm5")
+follow_offset = Vector2(0, -34.02)
+follow_damping = true
+follow_damping_value = Vector2(0.2, 0.2)
+lookahead = true
+lookahead_time = Vector2(0.6, 0)
+lookahead_acceleration = 0.5
+lookahead_max = true
+dead_zone_width = 0.357
+dead_zone_height = 0.684
+show_viewfinder_in_play = true
+metadata/_custom_type_script = "uid://bhexx6mj1xv3q"
+
+[node name="PhantomCameraHost" type="Node" parent="Camera2D" unique_id=484596655]
+process_priority = 300
+process_physics_priority = 300
+script = ExtResource("7_f1ek2")
+metadata/_custom_type_script = "uid://bd046eokvcnu2"
+
+[node name="LeftFace" type="CollisionPolygon2D" parent="." unique_id=1964578844]
+polygon = PackedVector2Array(-7, 8, 9, 8, 1, -8)
+
+[node name="Coot" type="AnimatedSprite2D" parent="." unique_id=1433046744]
+position = Vector2(9, 0)
+sprite_frames = SubResource("SpriteFrames_7dp3o")
+animation = &"CootDeceleration"
+offset = Vector2(-7, 0)
+
+[node name="FlipComponent" type="Node" parent="." unique_id=1092889832 node_paths=PackedStringArray("sprite")]
+script = ExtResource("6_85s6f")
+sprite = NodePath("../Coot")
+metadata/_custom_type_script = "uid://bg4uc5uxx15jc"
+
+[node name="VelocityComponent" type="Node" parent="." unique_id=166416768 node_paths=PackedStringArray("body")]
+script = ExtResource("7_14y0q")
+body = NodePath("..")
+metadata/_custom_type_script = "uid://cvrrg26e7yw4i"
+
+[node name="AnimationComponent" type="Node" parent="." unique_id=1468679969 node_paths=PackedStringArray("AnimatedSprite")]
+script = ExtResource("4_f1ek2")
+AnimatedSprite = NodePath("../Coot")
+idle_anim_name = "CootIdle"
+walk_anim_name = "CootWalk"
+accel_anim_name = "CootAcceleration"
+decel_anim_name = "CootDeceleration"
+metadata/_custom_type_script = "uid://6x5gufai1i8t"
+
+[node name="InputComponent" type="Node" parent="." unique_id=1911847911]
+script = ExtResource("3_vgqql")
+metadata/_custom_type_script = "uid://t1qrywldapcq"
+
+[node name="GravityComponent" type="Node" parent="." unique_id=1488052280 node_paths=PackedStringArray("body")]
+script = ExtResource("11_14y0q")
+body = NodePath("..")
+metadata/_custom_type_script = "uid://cd42bhh0myqfg"
+
+[node name="JumpComponent" type="Node" parent="." unique_id=1975252914 node_paths=PackedStringArray("body")]
+script = ExtResource("4_vgqql")
+body = NodePath("..")
+metadata/_custom_type_script = "uid://cwigsemjvwfdu"
