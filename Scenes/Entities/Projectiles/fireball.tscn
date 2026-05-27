@@ -4,7 +4,6 @@
 [ext_resource type="Texture2D" uid="uid://b1jskx8d7ibmc" path="res://Assets/fireball.png" id="1_h8q60"]
 [ext_resource type="Texture2D" uid="uid://4t8a6a751wsp" path="res://Assets/explosions/03.png" id="2_6ygg1"]
 [ext_resource type="Script" uid="uid://hrocxtlx18j1" path="res://Scripts/explosion_component.gd" id="2_k2una"]
-[ext_resource type="Texture2D" uid="uid://cdnfvkheloyej" path="res://raibyte.jpg" id="5_kf8wt"]
 [ext_resource type="Script" uid="uid://cvrrg26e7yw4i" path="res://Scripts/velocity_component.gd" id="6_2tbeo"]
 [ext_resource type="Script" uid="uid://cd42bhh0myqfg" path="res://Scripts/gravity_component.gd" id="7_6ygg1"]
 
@@ -85,22 +84,22 @@ region = Rect2(80, 0, 16, 16)
 [sub_resource type="SpriteFrames" id="SpriteFrames_ixie6"]
 animations = [{
 "frames": [{
-"duration": 0.5,
+"duration": 0.3,
 "texture": SubResource("AtlasTexture_ixie6")
 }, {
-"duration": 0.5,
+"duration": 0.3,
 "texture": SubResource("AtlasTexture_60vcm")
 }, {
-"duration": 0.5,
+"duration": 0.3,
 "texture": SubResource("AtlasTexture_1fnn4")
 }, {
-"duration": 0.5,
+"duration": 0.3,
 "texture": SubResource("AtlasTexture_5kg1f")
 }, {
-"duration": 0.5,
+"duration": 0.3,
 "texture": SubResource("AtlasTexture_i5wd7")
 }, {
-"duration": 0.5,
+"duration": 0.3,
 "texture": SubResource("AtlasTexture_mkddj")
 }, {
 "duration": 0.5,
@@ -156,7 +155,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"explode",
-"speed": 5.0
+"speed": 39.0
 }, {
 "frames": [{
 "duration": 0.5,
@@ -182,39 +181,26 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_2tbeo"]
-size = Vector2(225, 224)
+[sub_resource type="CircleShape2D" id="CircleShape2D_2tbeo"]
 
 [node name="Fireball" type="Node2D" unique_id=614750278]
 script = ExtResource("1_2tbeo")
 
-[node name="Camera2D" type="Camera2D" parent="." unique_id=1120197205]
-zoom = Vector2(2.075, 2.075)
+[node name="Collide Area" type="Area2D" parent="." unique_id=587569336]
 
-[node name="Area2D" type="Area2D" parent="." unique_id=587569336]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1133787422]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Collide Area" unique_id=1133787422]
 scale = Vector2(0.28, 0.28)
 shape = SubResource("CircleShape2D_we7h8")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1106882325]
 sprite_frames = SubResource("SpriteFrames_ixie6")
 animation = &"explode"
-
-[node name="Raibyte" type="Sprite2D" parent="." unique_id=1777986272]
-position = Vector2(-164.5, 159.78)
-scale = Vector2(39.24889, 1)
-texture = ExtResource("5_kf8wt")
-
-[node name="StaticBody2D" type="StaticBody2D" parent="Raibyte" unique_id=403901805]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Raibyte/StaticBody2D" unique_id=679254792]
-position = Vector2(0.5, 0)
-shape = SubResource("RectangleShape2D_2tbeo")
+frame = 22
+frame_progress = 1.0
 
 [node name="ExplosionComponent" type="Node" parent="." unique_id=2097184429 node_paths=PackedStringArray("explode_box", "animation_sprite")]
 script = ExtResource("2_k2una")
-explode_box = NodePath("../Area2D")
+explode_box = NodePath("../Collide Area")
 animation_sprite = NodePath("../AnimatedSprite2D")
 metadata/_custom_type_script = "uid://hrocxtlx18j1"
 
@@ -227,3 +213,11 @@ metadata/_custom_type_script = "uid://cd42bhh0myqfg"
 script = ExtResource("6_2tbeo")
 body = NodePath("..")
 metadata/_custom_type_script = "uid://cvrrg26e7yw4i"
+
+[node name="Knockback Area" type="Area2D" parent="." unique_id=1176633582]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Knockback Area" unique_id=477227045]
+scale = Vector2(10.38, 10.38)
+shape = SubResource("CircleShape2D_2tbeo")

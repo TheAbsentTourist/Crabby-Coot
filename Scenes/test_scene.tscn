@@ -1,7 +1,8 @@
 [gd_scene format=3 uid="uid://dxpo2jqsfoh15"]
 
 [ext_resource type="Texture2D" uid="uid://cdnfvkheloyej" path="res://raibyte.jpg" id="1_r5l72"]
-[ext_resource type="PackedScene" uid="uid://6cb30f1i6ht0" path="res://Scenes/Entities/player.tscn" id="2_r5l72"]
+[ext_resource type="PackedScene" uid="uid://di46844ydsi3y" path="res://Scenes/Entities/Projectiles/fireball.tscn" id="2_r5l72"]
+[ext_resource type="PackedScene" uid="uid://6cb30f1i6ht0" path="res://Scenes/Entities/player.tscn" id="3_50ct6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hb2xm"]
 size = Vector2(225, 224)
@@ -9,7 +10,7 @@ size = Vector2(225, 224)
 [node name="Test scene" type="Node2D" unique_id=640403564]
 
 [node name="Raibyte" type="Sprite2D" parent="." unique_id=85903329]
-position = Vector2(-164.49994, 434)
+position = Vector2(-338.49994, 122.5)
 scale = Vector2(39.24889, 1)
 texture = ExtResource("1_r5l72")
 
@@ -19,11 +20,8 @@ texture = ExtResource("1_r5l72")
 position = Vector2(0.5, 0)
 shape = SubResource("RectangleShape2D_hb2xm")
 
-[node name="Player" parent="." unique_id=734444364 instance=ExtResource("2_r5l72")]
-position = Vector2(-58, 304)
-
 [node name="Raibyte2" type="Sprite2D" parent="." unique_id=2122451032]
-position = Vector2(-253.99997, 259)
+position = Vector2(-427.99997, -52.500008)
 scale = Vector2(0.38666612, 0.34222215)
 texture = ExtResource("1_r5l72")
 
@@ -32,3 +30,9 @@ texture = ExtResource("1_r5l72")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Raibyte2/StaticBody2D" unique_id=1656706965]
 position = Vector2(0.5, 0)
 shape = SubResource("RectangleShape2D_hb2xm")
+
+[node name="Fireball" parent="." unique_id=614750278 instance=ExtResource("2_r5l72")]
+position = Vector2(-51, -8)
+
+[node name="Player" parent="." unique_id=734444364 instance=ExtResource("3_50ct6")]
+position = Vector2(0, -6.5000076)
