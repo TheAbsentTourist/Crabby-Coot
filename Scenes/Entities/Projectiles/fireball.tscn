@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://hrocxtlx18j1" path="res://Scripts/explosion_component.gd" id="2_k2una"]
 [ext_resource type="Script" uid="uid://cvrrg26e7yw4i" path="res://Scripts/velocity_component.gd" id="6_2tbeo"]
 [ext_resource type="Script" uid="uid://cd42bhh0myqfg" path="res://Scripts/gravity_component.gd" id="7_6ygg1"]
+[ext_resource type="Script" uid="uid://b3uvmr0f7abo" path="res://Scripts/knockback_component.gd" id="7_jm3wa"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_we7h8"]
 
@@ -198,10 +199,11 @@ animation = &"explode"
 frame = 22
 frame_progress = 1.0
 
-[node name="ExplosionComponent" type="Node" parent="." unique_id=2097184429 node_paths=PackedStringArray("explode_box", "animation_sprite")]
+[node name="ExplosionComponent" type="Node" parent="." unique_id=2097184429 node_paths=PackedStringArray("explode_box", "animation_sprite", "knockback")]
 script = ExtResource("2_k2una")
 explode_box = NodePath("../Collide Area")
 animation_sprite = NodePath("../AnimatedSprite2D")
+knockback = NodePath("../KnockbackComponent")
 metadata/_custom_type_script = "uid://hrocxtlx18j1"
 
 [node name="GravityComponent" type="Node" parent="." unique_id=920476960 node_paths=PackedStringArray("body")]
@@ -214,9 +216,15 @@ script = ExtResource("6_2tbeo")
 body = NodePath("..")
 metadata/_custom_type_script = "uid://cvrrg26e7yw4i"
 
+[node name="KnockbackComponent" type="Node" parent="." unique_id=985587374 node_paths=PackedStringArray("knockback_box")]
+script = ExtResource("7_jm3wa")
+knockback_force = 66.57
+knockback_box = NodePath("../Knockback Area")
+metadata/_custom_type_script = "uid://b3uvmr0f7abo"
+
 [node name="Knockback Area" type="Area2D" parent="." unique_id=1176633582]
 collision_layer = 2
-collision_mask = 2
+collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Knockback Area" unique_id=477227045]
 scale = Vector2(10.38, 10.38)

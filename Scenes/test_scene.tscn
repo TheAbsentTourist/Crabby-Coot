@@ -32,7 +32,7 @@ position = Vector2(0.5, 0)
 shape = SubResource("RectangleShape2D_hb2xm")
 
 [node name="Fireball" parent="." unique_id=614750278 instance=ExtResource("2_r5l72")]
-position = Vector2(-51, -8)
+position = Vector2(-101, -53)
 
 [node name="Player" parent="." unique_id=734444364 instance=ExtResource("3_50ct6")]
-position = Vector2(0, -6.5000076)
+position = Vector2(0, 2)

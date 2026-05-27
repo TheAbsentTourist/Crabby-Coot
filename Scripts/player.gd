@@ -61,4 +61,3 @@ func _physics_process(delta: float) -> void:
 			animation_component.current_state = AnimationComponent.AnimState.IDLE
 	
 	animation_component.update()
-	

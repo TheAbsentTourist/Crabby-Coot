@@ -32,7 +32,7 @@ func update() -> void:
 	# ONLY play if the state actually changed, or if it's not already playing
 	if current_state != previous_state or not AnimatedSprite.is_playing():
 		AnimatedSprite.play(anim_to_play)
-		print("Switched to animation: ", anim_to_play)
+		#print("Switched to animation: ", anim_to_play)
 	
 	# Update our tracker for the next frame
 	previous_state = current_state

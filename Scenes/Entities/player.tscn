@@ -11,6 +11,7 @@
 [ext_resource type="Script" uid="uid://cvrrg26e7yw4i" path="res://Scripts/velocity_component.gd" id="7_14y0q"]
 [ext_resource type="Script" uid="uid://bd046eokvcnu2" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="7_f1ek2"]
 [ext_resource type="Script" uid="uid://cd42bhh0myqfg" path="res://Scripts/gravity_component.gd" id="11_14y0q"]
+[ext_resource type="Script" uid="uid://cu34si54ptehd" path="res://Scripts/knockback_recieving_component.gd" id="12_f5ba2"]
 
 [sub_resource type="Resource" id="Resource_8erm5"]
 script = ExtResource("6_8erm5")
@@ -214,3 +215,8 @@ metadata/_custom_type_script = "uid://cd42bhh0myqfg"
 script = ExtResource("4_vgqql")
 body = NodePath("..")
 metadata/_custom_type_script = "uid://cwigsemjvwfdu"
+
+[node name="KnockbackRecievingComponent" type="Node" parent="." unique_id=2071438973 node_paths=PackedStringArray("character_body")]
+script = ExtResource("12_f5ba2")
+character_body = NodePath("..")
+metadata/_custom_type_script = "uid://cu34si54ptehd"
