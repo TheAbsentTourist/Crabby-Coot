@@ -5,19 +5,23 @@ extends Node2D
 @onready var velocity_component: VelocityComponent = $VelocityComponent
 @onready var gravity_component: GravityComponent = $GravityComponent
 
+@export var speed: float = 600.0 
 
-@export var speed: float = 10
+# Store the direction locally so it isn't lost
+var current_direction: Vector2 = Vector2.RIGHT
 
-var explosion_called: bool = false
+# 1. This runs the MOMENT the spawner creates the fireball
+func set_direction(new_dir: Vector2) -> void:
+	current_direction = new_dir.normalized() 
+	rotation = current_direction.angle()     
 
+# 2. This runs right AFTER the fireball and its components enter the scene tree
 func _ready() -> void:
-	velocity_component.direction = 1.0
+	if velocity_component:
+		velocity_component.speed = speed 
+		velocity_component.direction_v2 = current_direction
 
 func _physics_process(delta: float) -> void:
-	
-	# Ticks Velocity Component
 	velocity_component.update(delta)
-	
-	# Ticks Gravity Compoent
-	gravity_component.update(delta)
-	
+	if gravity_component:
+		gravity_component.update(delta)

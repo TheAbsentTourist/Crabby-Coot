@@ -1,7 +1,7 @@
 class_name VelocityComponent
 extends Node
 
-@onready var knockback_recieving_component: KnockbackReceiverComponent = $"../KnockbackRecievingComponent"
+@export var knockback_recieving_component: Node
 
 @export var body: Node2D
 @export var speed: float = 200.0
@@ -9,38 +9,50 @@ extends Node
 var previous_speed: float = 0.0
 var current_speed: float = 0.0
 var velocity: Vector2 = Vector2.ZERO
-var direction: float = 0.0
+
+# --- COMPATIBILITY LAYER ---
+var direction: float = 0.0:
+	set(value):
+		direction = value
+		direction_v2 = Vector2(value, 0.0)
+
+var direction_v2: Vector2 = Vector2.ZERO
+# ---------------------------
 
 func update(delta: float) -> void:
 	if body == null:
 		push_error("NULL VELOCITY COMPONENT BODY")
 		return
 
-	# 1. Fetch the active knockback velocity if the component exists
 	var knockback = Vector2.ZERO
 	if knockback_recieving_component:
 		knockback = knockback_recieving_component.knockback_velocity
 
 	if body.has_method("move_and_slide"):
-		previous_speed = abs(body.velocity.x)
+		previous_speed = body.velocity.length()
 		
-		# Calculate your desired baseline walk velocity
-		var target_walk_x = lerp(body.velocity.x, direction * speed, 10.0 * delta)
+		if direction_v2 != Vector2.ZERO and direction == 0.0:
+			# FIX 1: Force normalization here to protect move_and_slide velocity values
+			var clean_dir = direction_v2.normalized()
+			body.velocity = body.velocity.lerp(clean_dir * speed, 10.0 * delta)
+			body.velocity += knockback
+		else:
+			var target_walk_x = lerp(body.velocity.x, direction * speed, 10.0 * delta)
+			body.velocity.x = target_walk_x + knockback.x
+			body.velocity.y += knockback.y
+			
 		
-		# 2. COMBINE: Set character's velocity as standard movement PLUS knockback
-		# (We include knockback.y here too, just in case your knockback pushes vertically!)
-		body.velocity.x = target_walk_x + knockback.x
-		body.velocity.y = knockback.y 
-		
-		current_speed = abs(body.velocity.x)
+		current_speed = body.velocity.length()
 		body.move_and_slide()
 		
 	elif body is Node2D:
-		# Apply the horizontal direction and speed to our baseline velocity vector
-		velocity.x = direction * speed
+		if direction_v2 != Vector2.ZERO and direction == 0.0:
+			# FIX 2: Force normalization here to protect basic Node2D translation values
+			velocity = direction_v2.normalized() * speed
+		else:
+			velocity = Vector2(direction * speed, 0.0)
 		
-		# 3. COMBINE: Add knockback to the basic translation movement
 		var final_velocity = velocity + knockback
 		
-		# Move the body using the unified final velocity vector
+		
 		body.position += final_velocity * delta

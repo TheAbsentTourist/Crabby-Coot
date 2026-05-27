@@ -12,6 +12,8 @@
 [ext_resource type="Script" uid="uid://bd046eokvcnu2" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="7_f1ek2"]
 [ext_resource type="Script" uid="uid://cd42bhh0myqfg" path="res://Scripts/gravity_component.gd" id="11_14y0q"]
 [ext_resource type="Script" uid="uid://cu34si54ptehd" path="res://Scripts/knockback_recieving_component.gd" id="12_f5ba2"]
+[ext_resource type="Script" uid="uid://b3xde5f5hr8ei" path="res://Scripts/projectile_spawning_component.gd" id="13_kvkok"]
+[ext_resource type="PackedScene" uid="uid://di46844ydsi3y" path="res://Scenes/Entities/Projectiles/fireball.tscn" id="14_at1v1"]
 
 [sub_resource type="Resource" id="Resource_8erm5"]
 script = ExtResource("6_8erm5")
@@ -137,33 +139,33 @@ animations = [{
 }]
 
 [node name="Player" type="CharacterBody2D" unique_id=734444364]
+collision_layer = 8
+collision_mask = 15
 script = ExtResource("1_6t5aa")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=692187895]
 process_priority = 1
 physics_interpolation_mode = 1
 top_level = true
-position = Vector2(0, -34.02)
-zoom = Vector2(4.505, 4.505)
+position = Vector2(0, 0.945)
+zoom = Vector2(4, 4)
 
 [node name="PhantomCamera2D" type="Node2D" parent="Camera2D" unique_id=1412736773 node_paths=PackedStringArray("follow_target")]
 top_level = true
-position = Vector2(0, -34.02)
+position = Vector2(0, 0.945)
 script = ExtResource("5_3smsa")
 follow_mode = 5
 follow_target = NodePath("../..")
-zoom = Vector2(4.505, 4.505)
+zoom = Vector2(4, 4)
 tween_resource = SubResource("Resource_8erm5")
-follow_offset = Vector2(0, -34.02)
-follow_damping = true
+follow_offset = Vector2(0, 0.945)
 follow_damping_value = Vector2(0.2, 0.2)
 lookahead = true
-lookahead_time = Vector2(0.6, 0)
+lookahead_time = Vector2(0.6, 0.1)
 lookahead_acceleration = 0.5
 lookahead_max = true
 dead_zone_width = 0.357
-dead_zone_height = 0.684
-show_viewfinder_in_play = true
+dead_zone_height = 0.581
 metadata/_custom_type_script = "uid://bhexx6mj1xv3q"
 
 [node name="PhantomCameraHost" type="Node" parent="Camera2D" unique_id=484596655]
@@ -186,9 +188,11 @@ script = ExtResource("6_85s6f")
 sprite = NodePath("../Coot")
 metadata/_custom_type_script = "uid://bg4uc5uxx15jc"
 
-[node name="VelocityComponent" type="Node" parent="." unique_id=166416768 node_paths=PackedStringArray("body")]
+[node name="VelocityComponent" type="Node" parent="." unique_id=166416768 node_paths=PackedStringArray("knockback_recieving_component", "body")]
 script = ExtResource("7_14y0q")
+knockback_recieving_component = NodePath("../KnockbackRecievingComponent")
 body = NodePath("..")
+max_vertical_speed = 0.04
 metadata/_custom_type_script = "uid://cvrrg26e7yw4i"
 
 [node name="AnimationComponent" type="Node" parent="." unique_id=1468679969 node_paths=PackedStringArray("AnimatedSprite")]
@@ -219,4 +223,17 @@ metadata/_custom_type_script = "uid://cwigsemjvwfdu"
 [node name="KnockbackRecievingComponent" type="Node" parent="." unique_id=2071438973 node_paths=PackedStringArray("character_body")]
 script = ExtResource("12_f5ba2")
 character_body = NodePath("..")
+deceleration = 300.0
 metadata/_custom_type_script = "uid://cu34si54ptehd"
+
+[node name="ProjectileSpawningComponent" type="Node" parent="." unique_id=847586162 node_paths=PackedStringArray("spawn_point")]
+script = ExtResource("13_kvkok")
+projectile_scene = ExtResource("14_at1v1")
+spawn_point = NodePath("../projectile spawn point")
+cooldown_time = 0.6
+metadata/_custom_type_script = "uid://b3xde5f5hr8ei"
+
+[node name="Timer" type="Timer" parent="ProjectileSpawningComponent" unique_id=838575429]
+
+[node name="projectile spawn point" type="Node2D" parent="." unique_id=1380696694]
+position = Vector2(3, 0)

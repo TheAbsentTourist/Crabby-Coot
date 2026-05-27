@@ -206,25 +206,29 @@ animation_sprite = NodePath("../AnimatedSprite2D")
 knockback = NodePath("../KnockbackComponent")
 metadata/_custom_type_script = "uid://hrocxtlx18j1"
 
-[node name="GravityComponent" type="Node" parent="." unique_id=920476960 node_paths=PackedStringArray("body")]
-script = ExtResource("7_6ygg1")
-body = NodePath("..")
-metadata/_custom_type_script = "uid://cd42bhh0myqfg"
-
 [node name="VelocityComponent" type="Node" parent="." unique_id=1863602806 node_paths=PackedStringArray("body")]
 script = ExtResource("6_2tbeo")
 body = NodePath("..")
+speed = 42.22
 metadata/_custom_type_script = "uid://cvrrg26e7yw4i"
 
 [node name="KnockbackComponent" type="Node" parent="." unique_id=985587374 node_paths=PackedStringArray("knockback_box")]
 script = ExtResource("7_jm3wa")
-knockback_force = 66.57
+knockback_force = 40.0
 knockback_box = NodePath("../Knockback Area")
 metadata/_custom_type_script = "uid://b3uvmr0f7abo"
 
+[node name="GravityComponent" type="Node" parent="." unique_id=1972762440 node_paths=PackedStringArray("body")]
+script = ExtResource("7_6ygg1")
+gravity_multiplier = 0.2
+body = NodePath("..")
+base_gravity = 200.0
+metadata/_custom_type_script = "uid://cd42bhh0myqfg"
+
 [node name="Knockback Area" type="Area2D" parent="." unique_id=1176633582]
-collision_layer = 2
-collision_mask = 3
+scale = Vector2(0.9, 0.9)
+collision_layer = 12
+collision_mask = 15
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Knockback Area" unique_id=477227045]
 scale = Vector2(10.38, 10.38)
