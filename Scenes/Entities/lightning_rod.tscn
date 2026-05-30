@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://c0a20iqp32ion"]
+
+[ext_resource type="Texture2D" uid="uid://dhh7rbqnjp7ce" path="res://Assets/CrabbyCootStatic.png" id="1_sract"]
+
+[sub_resource type="Gradient" id="Gradient_sract"]
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_x66yv"]
+gradient = SubResource("Gradient_sract")
+fill = 1
+fill_from = Vector2(0.47391304, 0.4869565)
+
+[node name="LightningRod" type="Node2D" unique_id=948307105 groups=["lightning_rods"]]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1825146479]
+position = Vector2(0, 7.515)
+texture = ExtResource("1_sract")
+region_enabled = true
+region_rect = Rect2(224, 0, 32, 32)
+
+[node name="PointLight2D" type="PointLight2D" parent="." unique_id=365582431]
+position = Vector2(0, -7.56)
+texture = SubResource("GradientTexture2D_x66yv")

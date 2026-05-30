@@ -6,6 +6,10 @@ extends Node
 @export var body: Node2D
 @export var speed: float = 200.0
 
+# Replaced single 'friction' with separate acceleration and deceleration fields
+@export var acceleration: float = 10.0
+@export var deceleration: float = 12.0
+
 var previous_speed: float = 0.0
 var current_speed: float = 0.0
 var velocity: Vector2 = Vector2.ZERO
@@ -32,27 +36,27 @@ func update(delta: float) -> void:
 		previous_speed = body.velocity.length()
 		
 		if direction_v2 != Vector2.ZERO and direction == 0.0:
-			# FIX 1: Force normalization here to protect move_and_slide velocity values
 			var clean_dir = direction_v2.normalized()
-			body.velocity = body.velocity.lerp(clean_dir * speed, 10.0 * delta)
+			# Vector2 movement always uses acceleration here since direction_v2 is not zero
+			body.velocity = body.velocity.lerp(clean_dir * speed, acceleration * delta)
 			body.velocity += knockback
 		else:
-			var target_walk_x = lerp(body.velocity.x, direction * speed, 10.0 * delta)
+			# Determine whether to use acceleration or deceleration based on manual input
+			var active_weight = acceleration if direction != 0.0 else deceleration
+			
+			var target_walk_x = lerp(body.velocity.x, direction * speed, active_weight * delta)
 			body.velocity.x = target_walk_x + knockback.x
 			body.velocity.y += knockback.y
 			
-		
 		current_speed = body.velocity.length()
 		body.move_and_slide()
 		
 	elif body is Node2D:
 		if direction_v2 != Vector2.ZERO and direction == 0.0:
-			# FIX 2: Force normalization here to protect basic Node2D translation values
 			velocity = direction_v2.normalized() * speed
 		else:
 			velocity = Vector2(direction * speed, 0.0)
 		
 		var final_velocity = velocity + knockback
-		
 		
 		body.position += final_velocity * delta

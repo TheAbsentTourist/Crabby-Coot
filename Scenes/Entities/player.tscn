@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://6cb30f1i6ht0"]
 
 [ext_resource type="Script" uid="uid://k82ldo4o3iap" path="res://Scripts/player.gd" id="1_6t5aa"]
-[ext_resource type="Texture2D" uid="uid://b63iepn22ot02" path="res://Assets/CrabbyCootWizard.png" id="1_v0iea"]
 [ext_resource type="Script" uid="uid://t1qrywldapcq" path="res://Scripts/input_component.gd" id="3_vgqql"]
 [ext_resource type="Script" uid="uid://6x5gufai1i8t" path="res://Scripts/animation_component.gd" id="4_f1ek2"]
 [ext_resource type="Script" uid="uid://cwigsemjvwfdu" path="res://Scripts/jump_component.gd" id="4_vgqql"]
@@ -12,8 +11,8 @@
 [ext_resource type="Script" uid="uid://bd046eokvcnu2" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="7_f1ek2"]
 [ext_resource type="Script" uid="uid://cd42bhh0myqfg" path="res://Scripts/gravity_component.gd" id="11_14y0q"]
 [ext_resource type="Script" uid="uid://cu34si54ptehd" path="res://Scripts/knockback_recieving_component.gd" id="12_f5ba2"]
+[ext_resource type="PackedScene" uid="uid://cmhooh18g3gqk" path="res://Scenes/Entities/Projectiles/lightning_arc.tscn" id="13_at1v1"]
 [ext_resource type="Script" uid="uid://b3xde5f5hr8ei" path="res://Scripts/projectile_spawning_component.gd" id="13_kvkok"]
-[ext_resource type="PackedScene" uid="uid://di46844ydsi3y" path="res://Scenes/Entities/Projectiles/fireball.tscn" id="14_at1v1"]
 
 [sub_resource type="Resource" id="Resource_8erm5"]
 script = ExtResource("6_8erm5")
@@ -45,12 +44,15 @@ region = Rect2(19, 0, 19, 16)
 atlas = SubResource("CompressedTexture2D_8erm5")
 region = Rect2(0, 0, 19, 16)
 
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_pm2yg"]
+load_path = "res://.godot/imported/CrabbyCootWizard.png-7774d23a1c41867c3e1c64c2d7e90b7a.ctex"
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_7dp3o"]
-atlas = ExtResource("1_v0iea")
+atlas = SubResource("CompressedTexture2D_pm2yg")
 region = Rect2(0, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_h4iuc"]
-atlas = ExtResource("1_v0iea")
+atlas = SubResource("CompressedTexture2D_pm2yg")
 region = Rect2(16, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qqcod"]
@@ -148,7 +150,7 @@ process_priority = 1
 physics_interpolation_mode = 1
 top_level = true
 position = Vector2(0, 0.945)
-zoom = Vector2(4, 4)
+zoom = Vector2(2.5, 2.5)
 
 [node name="PhantomCamera2D" type="Node2D" parent="Camera2D" unique_id=1412736773 node_paths=PackedStringArray("follow_target")]
 top_level = true
@@ -156,7 +158,7 @@ position = Vector2(0, 0.945)
 script = ExtResource("5_3smsa")
 follow_mode = 5
 follow_target = NodePath("../..")
-zoom = Vector2(4, 4)
+zoom = Vector2(2.5, 2.5)
 tween_resource = SubResource("Resource_8erm5")
 follow_offset = Vector2(0, 0.945)
 follow_damping_value = Vector2(0.2, 0.2)
@@ -175,12 +177,12 @@ script = ExtResource("7_f1ek2")
 metadata/_custom_type_script = "uid://bd046eokvcnu2"
 
 [node name="LeftFace" type="CollisionPolygon2D" parent="." unique_id=1964578844]
-polygon = PackedVector2Array(-7, 8, 9, 8, 1, -8)
+polygon = PackedVector2Array(-7, 8, 9, 8, 1, -7)
 
 [node name="Coot" type="AnimatedSprite2D" parent="." unique_id=1433046744]
 position = Vector2(9, 0)
 sprite_frames = SubResource("SpriteFrames_7dp3o")
-animation = &"CootDeceleration"
+animation = &"CootIdle"
 offset = Vector2(-7, 0)
 
 [node name="FlipComponent" type="Node" parent="." unique_id=1092889832 node_paths=PackedStringArray("sprite")]
@@ -192,7 +194,8 @@ metadata/_custom_type_script = "uid://bg4uc5uxx15jc"
 script = ExtResource("7_14y0q")
 knockback_recieving_component = NodePath("../KnockbackRecievingComponent")
 body = NodePath("..")
-max_vertical_speed = 0.04
+speed = 150.0
+acceleration = 3.0
 metadata/_custom_type_script = "uid://cvrrg26e7yw4i"
 
 [node name="AnimationComponent" type="Node" parent="." unique_id=1468679969 node_paths=PackedStringArray("AnimatedSprite")]
@@ -228,7 +231,7 @@ metadata/_custom_type_script = "uid://cu34si54ptehd"
 
 [node name="ProjectileSpawningComponent" type="Node" parent="." unique_id=847586162 node_paths=PackedStringArray("spawn_point")]
 script = ExtResource("13_kvkok")
-projectile_scene = ExtResource("14_at1v1")
+projectile_scene = ExtResource("13_at1v1")
 spawn_point = NodePath("../projectile spawn point")
 cooldown_time = 0.6
 metadata/_custom_type_script = "uid://b3xde5f5hr8ei"

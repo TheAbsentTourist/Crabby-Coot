@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://cmhooh18g3gqk"]
+
+[ext_resource type="Script" uid="uid://bm3x5gdvyoktd" path="res://Scripts/lightning_arc.gd" id="1_322fp"]
+
+[node name="LightningArc" type="Node2D" unique_id=1652443661]
+script = ExtResource("1_322fp")
+jitter_amplitude = 3.0
+
+[node name="Line2D" type="Line2D" parent="." unique_id=567756593]
+width = 2.07
+default_color = Color(0.827451, 1, 1, 1)
+texture_mode = 1
+joint_mode = 2
+end_cap_mode = 2
+
+[node name="RayCast2D" type="RayCast2D" parent="." unique_id=1506847914]
+
+[node name="Timer" type="Timer" parent="." unique_id=1035824345]
